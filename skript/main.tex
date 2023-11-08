@@ -1,0 +1,153 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\geometry{
+    textheight=23cm,
+    textwidth=16.5cm,
+    top=1in
+}
+
+\setcounter{secnumdepth}{4}
+
+\numberwithin{equation}{section}
+
+% ------------------------------------------------------------------------------
+% First Pages
+% ------------------------------------------------------------------------------
+
+\title{Mathemathische Modellierung}
+\author{Adrian Hieber}
+\date{\today}
+
+\begin{document}
+\maketitle	
+\newpage
+
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------------------------
+% Content
+% ------------------------------------------------------------------------------
+
+\section{Modulinfos}
+
+Dieses Skript bezieht sich auf den Kurs Mathematische Modellierung von Kräutle. \cite{studon}\\
+Es gibt kein Übungsbetrieb, da man hierfür eher an dem Seminar erarbeiten soll.\\
+Als Referenzbuch wird Mathematische Modellierung von Eck\cite{eck} empfohlen.
+
+
+\section{Einführung}
+
+\subsection{Mathematische Modellierung mit gewöhnlichen Diff.gleichungen (ODE):}
+Ein sehr einfaches Beispiel aus Populitionsdynamik: Wachstum Schafherde.\\
+Zuerst: Welche Größen (unbekannte, Parameter) sind relevant (in physikalischer Dimension):
+\begin{equation}
+t=Zeit; \qquad \text{y(t)=Anzahl Schafe im Zeitpunkt t}
+\end{equation}
+\begin{itemize}
+    \item Variable t hat die \textbf{Dimension} 'Zeit' und eine Einheit (zb. Tage, Stunden...)
+    \item Variable y(t) hat die \textbf{Dimension} 'Anzahl'(='Stück'), kann auch als \textbf{Dimensionslos} bezeichnet werden
+\end{itemize}
+Für Funktion im mathematischen Modellen sollte man ein Definitionsbereich festlegen, wie z.B. $y:[0,T)\rightarrow\mathbb{R}$, $y[t_0, T]\rightarrow\mathbb{R}$ oder $y:[0,\inf)\rightarrow\mathbb{R}$.
+
+\subsubsection{Bemerkung:}
+y ist keine gegebene Funktion, sondern gesucht; a priori ist klar, ob y(t) für beliebige große t existiert.
+Existiert eine Lsg für alle Zeite, d.h. $y:[t_0,\inf)\rightarrow\mathbb{R}$ so bezeichnet man sie als \textbf{\underline{globale Lösung}}.
+
+\subsubsection{Modellannahmen:}
+Die Wachstumsrate w(t) sei proportional zum aktuellen Bestand: 
+\begin{equation}
+w(t)=K\cdot g(t)
+\end{equation}
+Es sei $K\in\mathbb{R}$ (ggf. $K\in\mathbb{R}^+$).
+Dabei ist die Wachstums\textbf{rate} definiert als Änderung des Bestands pro Zeitintervall, für 'kurze' Zeitintervalle T, noch genauer für $T\rightarrow 0$:
+\begin{equation}
+w(t)=\lim_{T\rightarrow 0} \frac{y(t+T)-y(t)}{T}=y'(t)
+\end{equation}
+Somit sind unsere Modellgleichungen (Anfangswerte nicht vergessen):
+\begin{equation}
+\boxed{y'(t)=K\cdot y(t), \qquad y(0)=0}
+\end{equation}
+Mit y'(t) als $\frac{Anzahl}{Zeit}$ und $y(0)$ als Anfangszeitpunkt $t_0=0$.\\
+Es enthält 2 \textbf{Parameter} $K\in \mathbb{R}$ (oder $K>0$ bzw $K\geq 0$) $y_0>0$ bzw $y_0\geq 0$ ('Daten')
+\paragraph{Dimensionen:}
+$y_0$: Anzahl \qquad
+$K$: $\frac{1}{Zeit}$ (ergibt sich als Dgl. da y'(t) die Dimension $\frac{Anzahl}{Zeit}$ hat, was sich wieder aus dem Differenzenquotient ergibt.
+
+\subsection{Was haben wir alles vernachlässigt; Aussehen von komplexe Modelle?}
+\begin{itemize}
+    \item ggf, hängt die Wachstumsrate von Nahrungsangebot ab ('begrenzte Ressourcen') \ref{begrenzte_ressourcen}
+    \item  ...
+\end{itemize}
+
+\newpage
+\section{Entdimensionalisierung}
+des Modells $y'(t)=K\cdot y(t), \qquad y(t_0)=y_0$
+\begin{equation}
+t [Zeit]; \qquad y [Stueck oder Anzahl]
+\end{equation}
+Wähle dazu (dimensionsbehaftete) "Basisgrößen"(Festlegeung von Maßstäben)$\overline{y}, \overline{t}$\\
+definiere:
+\begin{equation}
+\tau := \frac{t-t_0}{\overline{t}} \quad\text{und}\quad y(\tau):=\frac{y(t)}{\overline{y}}=\frac{y(\overline{t}\tau + t_0)}{\overline{y}}
+\end{equation}
+Hierbei ist $\tau$ und $y(\tau)$ \underline{\textbf{dimensionslose}} Größen.
+
+\subsection{Modell in diesen Größen ausdrücken:}
+bildlich:TODO\\
+\begin{equation}
+\leadsto
+y'(\tau)=\frac{\overline{t}}{\overline{y}} y'(\overline{t}\tau + t_0)
+\stackrel{DGL}{=}
+\frac{\overline{t}}{\overline{y}}\cdot K \cdot y(\overline{t}\tau + t_0)
+=\overline{t} K y(\tau)
+\end{equation}
+Nicht vergessen: Anfgangsbedingung auch skalieren:\\
+Mit $ \tau:=0$ ist $y(0)=\dfrac{y(\overline{t}\cdot 0+t_0)}{\overline{y}}
+\stackrel{A.B.}{=}
+\dfrac{y(t_0)}{\overline{y}}$ 
+
+\begin{equation}
+\leadsto
+\boxed{
+\begin{aligned}
+& y'(\tau)=\overline{t}\cdot K \cdot y(\tau)\\
+& y(0)=\frac{y_0}{\overline{y}}
+\end{aligned}
+}
+\end{equation}
+\subparagraph{Bemerkung}
+Die $y(0)$,$y'(\tau)$, $y(\tau)$ und Kostr. dimensionslos sind, müssen auch die Größen
+$\overline{t}K$ und $\frac{y_0}{\overline{y}}$.
+
+\subsubsection{Wahl von $\overline{y}$, $\overline{t}$?}
+\begin{itemize}
+	\item Größen sind dimensionslos (z.B. $ln\dfrac{y(t)}{y_0}=ln\stackrel{dim. behaftet}{\overbrace{y(t)}}-ln(\stackrel{dim. behaftet}{\overbrace{y_0}})$ ist fragwürdig)
+	\item einige Paramter können elemeniert werden
+	\subitem Analsis einfacher
+	\subitem es sind wenige Simulationen nötig um sich Überblick über die Abhängigkeiten der Lösung von den Paramtern zu verschaffen
+	\item Größen haben moderate Werte
+	\item Entdimensionalisierung dient als Vorbereitung eines eventuell geplanten \textbf{asymtotischen Entwicklung}\cite{asyEnt}
+\end{itemize}
+
+
+
+
+
+
+% ------------------------------------------------------------------------------
+% Reference and Cited Works
+% ------------------------------------------------------------------------------
+
+\newpage
+\bibliographystyle{IEEEtran}
+\bibliography{References.bib}
+
+% ------------------------------------------------------------------------------
+\end{document}

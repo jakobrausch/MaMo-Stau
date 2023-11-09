@@ -1,0 +1,97 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Madrid}
+\usecolortheme{default}
+
+%------------------------------------------------------------
+%This block of code defines the information to appear in the
+%Title page
+\title[MaMo - Stau] %optional
+{MaMo - Stau}
+
+\subtitle{Praxisseminar}
+
+\author[Hieber, Kilic, Rausch, Tatsianda] % (optional)
+{Adrian~Hieber \and Cenk~Kilic \and Jakob~Rausch \and Lea~Tatsianda}
+
+\date[\today] % (optional)
+{Vorstellung derzeitiger Ergebnisse}
+
+%\logo{\includegraphics[height=1cm]{overleaf-logo}}
+
+%End of title page configuration block
+%------------------------------------------------------------
+
+
+
+%------------------------------------------------------------
+%The next block of commands puts the table of contents at the 
+%beginning of each section and highlights the current section:
+
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Übersicht}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%------------------------------------------------------------
+
+
+\begin{document}
+
+%The next statement creates the title page.
+\frame{\titlepage}
+
+
+%---------------------------------------------------------
+%This block of code is for the table of contents after
+%the title page
+\begin{frame}
+\frametitle{Übersicht}
+\tableofcontents
+\end{frame}
+%---------------------------------------------------------
+
+
+\section{Betrachtung der Faktoren}
+
+%---------------------------------------------------------
+%Changing visivility of the text
+\begin{frame}
+\frametitle{Betrachtung der Faktoren}
+Erstmal muss man sich überlegen, welche Faktoren man in Betrachtung sieht in unser Modell einzubauen. 
+\newline
+
+\begin{columns}
+
+\column{0.5\textwidth}
+\textbf{Modellfaktoren}
+\begin{itemize}
+    \item<2-> Entfernung zum nächsten Auto
+    \item<2-> Geschindigkeit
+\end{itemize}
+
+\column{0.5\textwidth}
+\textbf{Umgebungsfaktoren}
+\begin{itemize}
+    \item<3-> Masse $m$
+    \item<3-> Länge $l$
+    \item<3-> Minimaler Abstand $\epsilon$
+    \item<3-> Eine Fahrbahn
+    \item<3-> Reaktionszeit $\tau$
+    \item<3-> $x_{i}(t) < x_{i-1}(t)+l+\epsilon$
+\end{itemize}
+
+\end{columns}
+\end{frame}
+
+%---------------------------------------------------------
+
+
+
+%---------------------------------------------------------
+
+
+\end{document}

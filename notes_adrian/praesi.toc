@@ -1,1 +1,4 @@
 \beamer@sectionintoc {1}{Betrachtung der Faktoren}{3}{0}{1}
+\beamer@sectionintoc {2}{Modell erstellen}{7}{0}{2}
+\beamer@sectionintoc {3}{Gleichgewicht}{12}{0}{3}
+\beamer@sectionintoc {4}{Maximaler Fluss}{26}{0}{4}

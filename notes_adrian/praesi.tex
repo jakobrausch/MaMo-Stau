@@ -5,8 +5,6 @@
 \usecolortheme{default}
 
 %------------------------------------------------------------
-%This block of code defines the information to appear in the
-%Title page
 \title[MaMo - Stau] %optional
 {MaMo - Stau}
 
@@ -76,12 +74,14 @@ Erstmal muss man sich überlegen, welche Faktoren man in Betrachtung sieht in un
 \column{0.5\textwidth}
 \textbf{Umgebungsfaktoren}
 \begin{itemize}
+	\item<3-> Eine Fahrbahn
     \item<3-> Masse $m$
     \item<3-> Länge $l$
     \item<3-> Minimaler Abstand $\epsilon$
-    \item<3-> Eine Fahrbahn
     \item<3-> Reaktionszeit $\tau$
     \item<3-> $x_{i}(t) < x_{i-1}(t)+l+\epsilon$
+    \item<3-> Dichtheit $\rho=\frac{|Autos|}{Strecke}$
+   	\item<3-> max Dichte $\rho=\frac{1}{L}$
 \end{itemize}
 
 \end{columns}
@@ -89,9 +89,95 @@ Erstmal muss man sich überlegen, welche Faktoren man in Betrachtung sieht in un
 
 %---------------------------------------------------------
 
-
+\section{Modell erstellen}
 
 %---------------------------------------------------------
 
+\begin{frame}
+\frametitle{Bremsweg}
+Zuerst habe ich mir überlegt was man genau haben will. Die erste Idee ist wie man das Bremsen in dem Modell darstellen kann. Dieser sollte abhängig von der Geschwindigkeit und der Entfernung zu dem vorherigen Auto sein.\\
+Das Bremsen (negative Beschleuning) kann man also schreiben als:
+\only<1>{$$m \cdot x_i''(t+\tau)=$$}
+\only<1>{$$[kg \cdot \frac{m}{s^2}=]$$}
+\only<2>{$$m \cdot x_i''(t+\tau)=\frac{x_i'(t)-x_{i-1}'(t)}{|x_i(t)-x_{i-1}(t)|}$$}
+\only<2>{$$[kg \cdot \frac{m}{s^2}=\frac{m}{s\cdot m}]$$}
+\only<3>{$$m \cdot x_i''(t+\tau)=w \cdot \frac{x_i'(t)-x_{i-1}'(t)}{|x_i(t)-x_{i-1}(t)|}$$}
+\only<3>{$$[kg \cdot \frac{m}{s^2}=\frac{m \cdot kg}{s} \cdot \frac{1}{s}]$$}
+\end{frame}
+
+\begin{frame}
+\frametitle{Bremsweg}
+$$m \cdot x_i''(t+\tau)=w \cdot \frac{x_i'(t)-x_{i-1}'(t)}{|x_i(t)-x_{i-1}(t)|}$$
+Durch Integrieren erhält man nun:
+$$m \cdot v_i(t+\tau)=w \cdot ln(|x_i(t)-x_{i-1}(t)|) + c$$
+Da wir nur die Geschwindigkeit hier betrachten wollen kann man auch schreiben als:
+$$v_i(t+\tau)=\widetilde{w} \cdot ln(|x_i(t)-x_{i-1}(t)|) + c$$
+\end{frame}
+
+%---------------------------------------------------------
+
+\section{Gleichgewicht}
+
+%---------------------------------------------------------
+\begin{frame}
+\frametitle{Gleichgewicht}
+
+Man überlegt, dass ein idealer Verkehr herscht, wenn alles im Gleichgewicht ist.
+Somit dass
+\begin{itemize}
+    \item gleiche Entfernung zum nächsten Auto
+    \item gleiche Geschindigkeit
+    \item<2-> $\rho = \frac{1}{L+d}=\frac{1}{x_i(t)-x_{i-1}(t)}$
+\end{itemize}
+\only<3->{Frage ist nun wie die Geschwindigkeit der einzelnen Autos von der Dichte abhängig ist.}
+\only<4>{$$v_i(t+\tau)=\widetilde{w} \cdot ln(|x_i(t)-x_{i-1}(t)|) + c$$}
+\only<5>{$$v_i(t+\tau)=\widetilde{w} \cdot ln(\frac{1}{|\rho|}) + c$$}
+\only<6>{$$v_i(t+\tau)=\widetilde{w} \cdot ln(\frac{1}{|\rho|}) + c$$}
+\only<7>{$$v(\rho)=\widetilde{w} \cdot ln(\frac{1}{|\rho|}) + c$$}
+\only<8->{$$v(\rho)=\widetilde{w} \cdot ln(\frac{\rho_{max}}{|\rho|})$$}
+\only<7->{$$v(\rho_{max})\stackrel{!}{=}0 $$}
+\only<7->{$$\Rightarrow c=-\widetilde{w} \cdot ln(|\frac{\rho_{max}}{\rho}|)$$}
+\end{frame}
+
+\begin{frame}
+\frametitle{Geschwindigkeitsbegrenzung im Gleichgewicht}
+
+Nehmen wir nun an dass eine Geschwindigkeitsbegrenzung $v_{max}$ existiert.\\
+Somit ist eine gewisse Dichte $\rho_{min}$ erforderlich, dass die Auto sich beeinflussen.
+\only<2->{$$v(\rho)=\widetilde{w} \cdot ln(\frac{\rho_{max}}{|\rho|})$$}
+\only<3->{$$v(\rho_{min})=\widetilde{w} \cdot ln(\frac{\rho_{max}}{|\rho_{min}|})\stackrel{!}{=}v_{max}$$}
+\only<4->{$$\Rightarrow \widetilde{w}=v_{max} \cdot ln(\frac{\rho_{max}}{|\rho_{min}|})^{-1}$$}
+\only<5->{
+\begin{block}{Finale Geschwindigkeit}
+$$v(\rho)=v_{max} \cdot ln(\frac{\rho_{max}}{|\rho_{min}|})^{-1} \cdot ln(\frac{\rho_{max}}{|\rho|})$$
+\end{block}
+}
+\end{frame}
+
+%---------------------------------------------------------
+
+\section{Maximaler Fluss}
+
+%---------------------------------------------------------
+
+\begin{frame}
+\frametitle{Maximaler Fluss}
+Unser Ziel ist nun aber natürlich der der maximaler Fluss.\\
+Der Fluss allgemein ist 
+$$\Phi(\rho)
+=\frac{|Autos|}{Zeit}
+=\frac{|Autos|}{Strecke} \cdot \frac{Strecke}{Zeit}
+=\rho \cdot v(\rho)$$
+
+Um den Fluss zu maximieren leiten wir den Fluss ab.
+$$\frac{d}{dt}\Phi(\rho)=0$$
+
+Somit haben wir unser Maximum bei
+$$\rho_{opt}=\frac{\rho_{max}}{e}=\frac{1}{e\cdot L}$$
+
+\end{frame}
+
+
+%---------------------------------------------------------
 
 \end{document}

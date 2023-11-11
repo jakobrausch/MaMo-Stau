@@ -1,0 +1,19 @@
+Gesamtgrößen
+•	Zeit: t
+•	Strecke: s
+•	Durchschnittsgeschwindigkeit: V = (∑p vi)/p
+•	Verkehrsfluss: Q = Autos/Zeit = V*p
+•	Verkehrsdichte: p = Autos/Strecke = Q/V
+•	Tempolimit Vmax
+Variablen für jedes Fahrzeug i
+•	Wunschgeschwindigkeit: v0 
+•	Beschleunigung: ai
+•	Geschwindigkeit: vi(t + ∆t) = min(v + a*∆t, v0, vsafe) 
+•	Sicherheitsabstand zum Vordermann: xsafe 
+•	Bremsen (mit Reaktionszeit)
+•	Standort auf der Strecke: xi
+•	Abstand zum Vordermann:  xi-1 - xi  
+•	Reaktionszeit tr
+•	Bremsverzögerung: abremsen 
+•	Mindestabstand zum Vordermann: xi-1 - xi  >= xsafe = tr*vi + vi2/2abremsen – vi-12/2abremsen
+=> Sichere Geschwindigkeit: vsafe = − abremsen*tr + (abremsen2*tr2 + vi-12 + 2*abremsen*xsafe)1/2
